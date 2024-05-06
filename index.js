@@ -1,14 +1,19 @@
 let myLeads = []
-let leadsFromLocalStorage = localStorage.getItem(myLeads)
+let leadsFromLocalStorage = localStorage.getItem("myLeads")
+if (leadsFromLocalStorage) {
 myLeads = JSON.parse(leadsFromLocalStorage)
+}
 
 const inputBtn = document.getElementById("input-btn")
 const inputEl = document.getElementById("input-el")
 const ulEl = document.getElementById("ul-el")
+const deleteBtn = document.getElementById("delete-btn")
 
 
 inputBtn.addEventListener("click", function() {
+     if (inputEl.value) {
      myLeads.push(inputEl.value)
+     }
      ulEl.innerHTML +=   `<li>
                               <a href="${inputEl.value}" target="_blank">${inputEl.value}</a>
                          </li>`
@@ -17,9 +22,15 @@ inputBtn.addEventListener("click", function() {
      
  })
 
+deleteBtn.addEventListener("click", function() {
+     localStorage.clear()
+     myLeads =[]
+     renderLeads()
+})
 
 
-/*if leadsFromLocalStorage {
+
+if (leadsFromLocalStorage) {
      console.log(localStorage.getItem("myLeads"))
      renderLeads()
 }
